@@ -1,0 +1,22 @@
+<div class="container">
+    <div *ngIf="isLoading">
+        <mat-spinner></mat-spinner>
+        <p>Please wait we are loading data for you</p>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="50" class="viewport" [class.hidden]="isLoading">
+        <table cdk-table [dataSource]="employeesList">
+            <ng-container cdkColumnDef="id">
+                <th cdk-header-cell *cdkHeaderCellDef class="custom-header"> ID </th>
+                <td cdk-cell *cdkCellDef="let element"> {{element._id}} </td>
+            </ng-container>
+
+            <ng-container cdkColumnDef="name">
+                <th cdk-header-cell *cdkHeaderCellDef class="custom-header"> Name </th>
+                <td cdk-cell *cdkCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+            <tr class="custom-row" cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </cdk-virtual-scroll-viewport>
+</div>
